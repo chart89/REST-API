@@ -21,7 +21,8 @@ const db = {
 
     messageStatus: [
       {message: 'OK'},
-      {message: 'Not found...'}
+      {message: 'Not found...'},
+      {message: 'The slot is already taken...'}
     ],
 };
 

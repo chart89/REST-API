@@ -26,9 +26,16 @@ router.route('/seats/:id').get((req, res) => {
 // post new seats
  router.route('/seats').post((req, res) => {
 
-    const id = uuidv4();
-    db.seats.push({id: id, ...req.body }),
-    res.json(db.messageStatus[0]);
+    const {day, seat} = req.body;
+    const isTrue = db.seats.some(item => item.day === day && item.seat === seat);
+    
+    if(isTrue === false){
+        const id = uuidv4();
+        db.seats.push({id: id, ...req.body }),
+        res.json(db.messageStatus[0]);
+    } else {
+        res.json(db.messageStatus[2]);
+    }
 });
 
 // update seats
