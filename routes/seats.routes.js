@@ -33,6 +33,7 @@ router.route('/seats/:id').get((req, res) => {
         const id = uuidv4();
         db.seats.push({id: id, ...req.body }),
         res.json(db.messageStatus[0]);
+        req.io.emit('seatsUpdated', db.seats);
     } else {
         res.json(db.messageStatus[2]);
     }
