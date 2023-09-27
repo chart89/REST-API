@@ -63,6 +63,7 @@ export const addSeatRequest = (seat) => {
   };
 };
 
+
 /* INITIAL STATE */
 
 const initialState = {
