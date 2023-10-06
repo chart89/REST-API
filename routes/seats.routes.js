@@ -1,67 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const SeatsController = require('../controllers/seats.controller');
 const { v4: uuidv4 } = require('uuid');
 
 // get all seats
-router.route('/seats').get((req, res) => {
-    res.json(db.seats);
-});
+router.get('/seats', SeatsController.getAll);
 
 // get random seats
-router.route('/seats/random').get((req, res) => {
-    res.json(db.seats[Math.floor(Math.random() * db.seats.length)]);
-});
+router.get('/seats/random', SeatsController.getRandom);
 
 // get seats by id
-
-router.route('/seats/:id').get((req, res) => {
-    for(let findId of db.seats) {
-        if(req.params.id === findId.id) {
-            res.json(findId)
-        };
-    };
-});
+router.get('/seats/:id', SeatsController.getById);
 
 // post new seats
- router.route('/seats').post((req, res) => {
-
-    const {day, seat} = req.body;
-    const isTrue = db.seats.some(item => item.day === day && item.seat === seat);
-    
-    if(isTrue === false){
-        const id = uuidv4();
-        db.seats.push({id: id, ...req.body }),
-        res.json(db.messageStatus[0]);
-        req.io.emit('seatsUpdated', db.seats);
-    } else {
-        res.json(db.messageStatus[2]);
-    }
-});
+router.post('/seats', SeatsController.postOne);
 
 // update seats
-
-router.route('/seats/:id').put((req, res) => {
-
-    for(let findId of db.seats) {
-        if(req.params.id === findId.id) {
-            db.seats[db.seats.indexOf(findId)] = {id: findId.id, ...req.body};
-            res.json(db.messageStatus[0]);
-        };
-    };
-});
+router.put('/seats/:id', SeatsController.putOne);
 
 // delete seats
-
-router.route('/seats/:id').delete((req, res) => {
-
-    for(let findId of db.seats) {
-        if(req.params.id === findId.id) {
-            db.seats.splice(db.seats.indexOf(findId), 1);
-            res.json(db.messageStatus[0]);
-        };
-    };
-});
-
+router.delete('/seats/:id', SeatsController.deleteOne);
 
 module.exports = router;

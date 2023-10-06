@@ -2,9 +2,11 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "4.17.1",
+    "mongoose": "7.4.3",
     "socket.io": "4.7.2",
     "socket.io-client": "^4.7.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "yarn": "^1.22.19"
   },
   "scripts": {
     "start": "nodemon server.js"
@@ -12,5 +14,8 @@
   "name": "REST-API",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
