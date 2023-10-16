@@ -10,7 +10,6 @@ const Lineup = () => {
   const dispatch = useDispatch();
   const concerts = useSelector(getConcerts)
   const request = useSelector(getRequest);
-
   useEffect(() => {
     dispatch(loadConcertsRequest())
   }, [dispatch]);

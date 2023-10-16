@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
+const workshopsRoutes = require('./routes/workshops.routes');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));
@@ -27,6 +28,8 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 app.use('/api', testimonialsRoutes); // add testimonials routes to server
 app.use('/api', concertsRoutes); // add concertst routes to server
 app.use('/api', seatsRoutes); // add seats routes to server
+app.use('/api', workshopsRoutes); // add workshops routes to server
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
@@ -37,8 +40,8 @@ app.use((req, res) => {
     res.status(404).json({message: 'Not found...'});
   })
 
-// connects our backend code with the database
-mongoose.connect('mongodb+srv://kaiju83:HaloMasterChief117@cluster0.3qxxs4z.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+/// connects our backend code with the database
+mongoose.connect('mongodb+srv://kaiju83:HaloMasterChief117@cluster0.3qxxs4z.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -56,3 +59,4 @@ io.on('connection', (socket) => {
 
   console.log('New client! Its id – ', socket.id);
 });
+
