@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const app = express();
 
 const TestimonialsController = require('../controllers/testimonials.controller');
+const helmet = require('helmet');
+
+app.use(helmet());
 
 
 // get all testimonials

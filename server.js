@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const path = require('path');
 const socket = require('socket.io');
+const helmet = require('helmet');
 
 // import Mongoose
 const mongoose = require('mongoose');
@@ -12,6 +13,8 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 const workshopsRoutes = require('./routes/workshops.routes');
+
+app.use(helmet());
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true}));

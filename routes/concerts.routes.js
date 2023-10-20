@@ -1,6 +1,10 @@
 const express = require('express');
+const app = express();
 const router = express.Router();
 const ConcertsController = require('../controllers/concerts.controller');
+const helmet = require('helmet');
+
+app.use(helmet());
 
 // get all concerts
 router.get('/concerts', ConcertsController.getAll);

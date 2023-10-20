@@ -1,7 +1,11 @@
 const express = require('express');
+const app = express();
 const router = express.Router();
 const SeatsController = require('../controllers/seats.controller');
 const { v4: uuidv4 } = require('uuid');
+const helmet = require('helmet');
+
+app.use(helmet());
 
 // get all seats
 router.get('/seats', SeatsController.getAll);
